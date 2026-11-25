@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block title %}How accurate are the estimates?{% endblock %}
+{% block content %}
+{% set cv = metrics.cv %}
+{% set sel = metrics.selected_model %}
+{% set best = metrics.best_by_mape %}
+{% set dep = metrics.deployed_cv %}
+{% set level = (interval.level * 100)|round|int %}
+{% set test = metrics.test %}
+<section class="intro">
+  <h1>How accurate are the estimates?</h1>
+  <p class="lede">Typically within about {{ dep.mean.median_ape|pct }} of the asking price, and sometimes far off. Here is how we measured that, and what the model can and cannot do.</p>
+</section>
+
+<section class="kpis" aria-label="Accuracy figures">
+  <div class="kpi"><p class="kpi-label">Typical error (median)</p><p class="kpi-value">{{ dep.mean.median_ape|pct }}</p></div>
+  <div class="kpi"><p class="kpi-label">Estimates within ±20%</p><p class="kpi-value">{{ dep.mean.within_20pct|pct }}</p></div>
+  <div class="kpi"><p class="kpi-label">Average error (MAPE)</p><p class="kpi-value">{{ dep.mean.mape|pct }}</p></div>
+  <div class="kpi"><p class="kpi-label">{{ level }}% range</p><p class="kpi-value">{{ interval.log_low|multiplier }} to {{ interval.log_high|multiplier }}</p></div>
+</section>
+<p class="muted small">Cross-validated on all {{ dep.rows }} listings ({{ metrics.cv_protocol.n_repeats }} repeats of grouped {{ metrics.cv_protocol.n_splits }}-fold CV); each listing is scored by a model that never saw it or its cross-posted copies.</p>
+
+<section class="card prose">
+  <h2 class="card-title">The deployed estimator</h2>
+  <p><strong>{{ bundle.model_label }}</strong>, using {{ bundle.model_inputs|inputs }}.</p>
+  {% if best != sel %}
+  <p>{{ cv[best].label }} had the lowest cross-validated error ({{ cv[best].mean.mape|pct(1) }} vs {{ cv[sel].mean.mape|pct(1) }}).
+     The gap was {{ "%.1f"|format(cv[sel].selection.gap_to_best * 100) }} percentage points with a standard error of {{ "%.1f"|format(cv[sel].selection.gap_se * 100) }}, which is too small to tell apart from noise.
+     The rule is to deploy the <em>simplest</em> model within one standard error of the best, so the simpler model was chosen. It is also easier to explain and check.</p>
+  {% else %}
+  <p>It had the lowest cross-validated error, and no simpler model was within one standard error of it.</p>
+  {% endif %}
+  <p>Facing, open sides, road width and layout membership were all tried in the regression and forest models. On {{ metrics.cv_protocol.rows }} training listings they did not measurably improve accuracy. They are still used to pick comparable listings. As more listings are added, the same selection rule will move to a richer model when the data supports it.</p>
+</section>
+
+<section class="card">
+  <h2 class="card-title">Held-out test</h2>
+  {% if test.count == 0 %}
+    <p>The held-out test split (20% of plot groups, set aside before any model was compared) <strong>has not been scored yet</strong>. Until it is, the figures on this page are cross-validation estimates.</p>
+  {% else %}
+    {% set t = test.latest %}
+    <p>Scored <strong>{{ test.count }} time{{ "s" if test.count != 1 }}</strong>{% if test.count > 1 %} (repeat scorings leak information into model choice; treat these as optimistic){% endif %}.
+       The latest scoring was on {{ t.evaluated_at[:10] }}: {{ t.n_test }} test listings, models fit on {{ t.n_train }} training listings.</p>
+    {% if not test.matches_deployed %}<div class="alert alert-warning" role="note"><p>The selected model has changed since this test, so these figures describe an earlier configuration.</p></div>{% endif %}
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th scope="col">Model</th><th scope="col" class="num">Median error</th><th scope="col" class="num">Within ±20%</th><th scope="col" class="num">MAPE</th><th scope="col" class="num">{{ level }}% range covered</th></tr></thead>
+        <tbody>
+        {% for name, r in t.results.items() %}
+          <tr{% if name == t.selected_model %} class="row-selected"{% endif %}>
+            <th scope="row">{{ r.label }}{% if name == t.selected_model %} <span class="tag">selected</span>{% endif %}</th>
+            <td class="num">{{ r.median_ape|pct(1) }}</td><td class="num">{{ r.within_20pct|pct }}</td>
+            <td class="num">{{ r.mape|pct(1) }}</td><td class="num">{{ r.interval_coverage|pct }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted small">With only {{ t.n_test }} test listings, one or two unusual plots move these figures a lot.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2 class="card-title">Every model we compared</h2>
+  <p class="muted">Cross-validated on the {{ metrics.cv_protocol.rows }} training listings only (mean ± spread across {{ metrics.cv_protocol.n_repeats }} repeats). The gap is paired, listing by listing, against the lowest-MAPE model.</p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th scope="col">Model</th><th scope="col" class="num">MAPE</th><th scope="col" class="num">Median error</th><th scope="col" class="num">Within ±20%</th><th scope="col" class="num">R² (log price)</th><th scope="col" class="num">Gap to best ± SE</th></tr></thead>
+      <tbody>
+      {% for name, r in cv.items() %}
+        <tr{% if name == sel %} class="row-selected"{% endif %}>
+          <th scope="row">{{ r.label }}{% if name == sel %} <span class="tag">deployed</span>{% endif %}{% if name == best and best != sel %} <span class="tag tag-muted">lowest MAPE</span>{% endif %}</th>
+          <td class="num">{{ r.mean.mape|pct(1) }} <span class="cell-sub">± {{ r.std.mape|pct(1) }}</span></td>
+          <td class="num">{{ r.mean.median_ape|pct(1) }}</td>
+          <td class="num">{{ r.mean.within_20pct|pct }}</td>
+          <td class="num">{{ "%.2f"|format(r.mean.r2_log_price) }}</td>
+          <td class="num">{% if name == best %}—{% else %}+{{ r.selection.gap_to_best|pct(1) }} <span class="cell-sub">± {{ r.selection.gap_se|pct(1) }}</span>{% endif %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if "linear_price" in cv %}
+  <p class="muted small">“Linear regression on raw price” is the original project's model form. Big plots dominate it, and it can predict negative prices{% if cv.linear_price.mean.nonpositive_predictions %}: on average {{ cv.linear_price.mean.nonpositive_predictions|round(1) }} per CV repeat{% endif %}.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <h2 class="card-title">Estimates against asking prices</h2>
+  <p class="muted">Each dot is a listing, estimated by a model that never saw it. Dots on the diagonal are exact. The shaded band is the {{ level }}% range.</p>
+  <figure class="chart">{{ chart }}</figure>
+  <details class="disclosure">
+    <summary>Show all {{ bundle.oof_points|length }} points as a table</summary>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th scope="col" class="num">Source row</th><th scope="col">Locality</th><th scope="col" class="num">Area</th><th scope="col" class="num">Asking price</th><th scope="col" class="num">Estimate</th><th scope="col" class="num">Error</th></tr></thead>
+        <tbody>
+        {% for p in bundle.oof_points|sort(attribute="source_row") %}
+          <tr><td class="num">{{ p.source_row }}</td><td>{{ p.locality }}</td><td class="num">{{ p.area_sqyd|num(2) }} sq yd</td>
+              <td class="num">{{ p.actual|inr_short }}</td><td class="num">{{ p.predicted|inr_short }}</td>
+              <td class="num">{{ "%+.0f"|format((p.predicted / p.actual - 1) * 100) }}%</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title">Method</h2>
+  <ol>
+    <li><strong>Cleaning.</strong> Prices such as “1.2 Crore” and road widths such as “30.00 ft” are parsed. Rows with impossible values are dropped, with the reason recorded. Unparseable optional fields are left missing, not guessed. {{ quality.raw_rows }} rows became {{ quality.clean_rows }}.</li>
+    <li><strong>Grouping.</strong> Listings with the same price and area are treated as one plot ({{ quality.cross_posted_groups }} plots were cross-posted under several localities). Folds and the test split never separate a plot's copies, which would inflate accuracy.</li>
+    <li><strong>Test split first.</strong> 20% of plot groups were set aside before any model was compared. They are scored only on request, and every scoring is logged.</li>
+    <li><strong>Model comparison.</strong> Two baselines, the original linear model, ridge regression and a random forest were compared by repeated grouped cross-validation. The regression and forest models predict log price per sq yd.</li>
+    <li><strong>Range.</strong> The {{ level }}% range is taken from the spread of out-of-fold errors. It is not a guarantee: it describes how wrong past estimates were.</li>
+  </ol>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title">Limitations</h2>
+  <ul>
+    <li>Only {{ bundle.metadata.rows }} listings from one snapshot of one website. Asking prices are not transaction prices.</li>
+    <li>Nothing about legal status (HMDA/DTCP approval, title, encumbrances), exact location, or amenities is in the data, and these move real prices a lot.</li>
+    <li>Plots larger than {{ bundle.schema.area_sqyd.p95|num }} sq yd or smaller than {{ bundle.schema.area_sqyd.p05|num }} sq yd are rare in the data, so estimates for them are rough.</li>
+  </ul>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title">What changed from the original project</h2>
+  <ul>
+    <li>The original prediction script passed <code>land_area</code>, <code>no_of_open_gates</code> and <code>road_width</code> to a model trained on <code>Plot_Area</code>, <code>open_sides</code> and <code>Width_road</code>. The mismatched columns were silently filled with zero, so <strong>every plot of the same facing got the same price</strong>: a negative number, hidden by <code>abs()</code>. Training and prediction now share one feature function, and the API rejects unknown fields.</li>
+    <li>The original model one-hot encoded listing titles and locations: 67 features for 47 training rows. It was scored on a single random split that ignored cross-posted duplicates.</li>
+    <li>Listings with any missing field were dropped (60 of 100 kept). Missing optional fields are now imputed ({{ quality.clean_rows }} kept).</li>
+  </ul>
+</section>
+{% endblock %}

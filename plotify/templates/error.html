@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ error.code }} {{ error.name }}{% endblock %}
+{% block content %}
+<section class="intro error-page">
+  <p class="eyebrow">Error {{ error.code }}</p>
+  <h1>{{ error.name }}</h1>
+  <p class="lede">{{ error.description }}</p>
+  <p><a class="button" href="{{ url_for('web.index') }}">Back to the estimator</a></p>
+</section>
+{% endblock %}

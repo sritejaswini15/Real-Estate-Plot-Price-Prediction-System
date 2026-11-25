@@ -1,0 +1,42 @@
+{
+  "data_file": "99acres_patancheru_properties.xlsx",
+  "data_sha256": "034b04b67fc7bcf501a3f0fa7c7081a7cee46fe351f2ce8feed071fca08ea956",
+  "region": "Patancheru",
+  "raw_rows": 100,
+  "clean_rows": 94,
+  "dropped_invalid": [
+    {
+      "source_row": 68,
+      "reason": "plot area 22.11 sq yd outside 50-100000 (likely a unit error)"
+    }
+  ],
+  "dropped_duplicate_source_rows": [
+    11,
+    62,
+    63,
+    64,
+    65
+  ],
+  "unparseable_optional_values": {
+    "open_sides": 3
+  },
+  "missing_after_cleaning": {
+    "facing": 18,
+    "open_sides": 16,
+    "road_width_ft": 33
+  },
+  "listing_groups": 81,
+  "cross_posted_groups": 7,
+  "localities": {
+    "Patancheru": 42,
+    "Isnapur": 21,
+    "Muthangi": 12,
+    "Patighanpur": 7,
+    "Kistareddypet": 4,
+    "Pati": 4,
+    "Chitkul": 1,
+    "Sreeram Nagar Colony": 1,
+    "Patancheru Industrial Area": 1,
+    "Alwin Colony": 1
+  }
+}

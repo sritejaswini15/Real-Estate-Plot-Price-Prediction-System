@@ -1,0 +1,202 @@
+{
+  "model_version": "20261125163405-034b04b6",
+  "selection_metric": "mape",
+  "selection_rule": "simplest candidate within one standard error (paired, per plot group) of the lowest-MAPE candidate",
+  "best_by_mape": "random_forest_log_rate",
+  "selected_model": "locality_median_rate",
+  "cv_protocol": {
+    "n_splits": 5,
+    "n_repeats": 10,
+    "grouped": true,
+    "rows": 76,
+    "seed": 0
+  },
+  "cv": {
+    "median_rate": {
+      "label": "Baseline: overall median ₹/sq yd × area",
+      "mean": {
+        "mape": 0.45973085824967985,
+        "median_ape": 0.27371851401799663,
+        "within_20pct": 0.3157894736842105,
+        "mae_inr": 8261231.748810479,
+        "r2_log_price": 0.7218698532360436,
+        "nonpositive_predictions": 0.0
+      },
+      "std": {
+        "mape": 0.018684343141102323,
+        "median_ape": 0.027153546283250462,
+        "within_20pct": 0.07621994384641564,
+        "mae_inr": 429332.90539723367,
+        "r2_log_price": 0.013085023391542371,
+        "nonpositive_predictions": 0.0
+      },
+      "selection": {
+        "mape": 0.45973085824967974,
+        "gap_to_best": 0.08610059344709427,
+        "gap_se": 0.027823660689438846,
+        "within_one_se": false
+      }
+    },
+    "locality_median_rate": {
+      "label": "Baseline: locality median ₹/sq yd × area",
+      "mean": {
+        "mape": 0.39722730510308274,
+        "median_ape": 0.27585061475324385,
+        "within_20pct": 0.3394736842105263,
+        "mae_inr": 8495699.991829202,
+        "r2_log_price": 0.7590764206906806,
+        "nonpositive_predictions": 0.0
+      },
+      "std": {
+        "mape": 0.011463195489046608,
+        "median_ape": 0.011366807446973019,
+        "within_20pct": 0.0446421426315771,
+        "mae_inr": 122576.43970808222,
+        "r2_log_price": 0.00887576499045422,
+        "nonpositive_predictions": 0.0
+      },
+      "selection": {
+        "mape": 0.3972273051030827,
+        "gap_to_best": 0.011844257100827964,
+        "gap_se": 0.019866738779944833,
+        "within_one_se": true
+      }
+    },
+    "linear_price": {
+      "label": "Linear regression on raw price (the original model form)",
+      "mean": {
+        "mape": 1.669016102165589,
+        "median_ape": 0.8609634277500332,
+        "within_20pct": 0.14605263157894738,
+        "mae_inr": 15645547.293307927,
+        "r2_log_price": -62.667240136061444,
+        "nonpositive_predictions": 17.5
+      },
+      "std": {
+        "mape": 0.31770895857728587,
+        "median_ape": 0.1638840085097129,
+        "within_20pct": 0.049407850935575225,
+        "mae_inr": 1592461.044324701,
+        "r2_log_price": 11.268086786951203,
+        "nonpositive_predictions": 3.13581462037113
+      },
+      "selection": {
+        "mape": 1.669016102165589,
+        "gap_to_best": 1.3589478512776192,
+        "gap_se": 0.46670446820484496,
+        "within_one_se": false
+      }
+    },
+    "ridge_log_rate": {
+      "label": "Ridge regression on log ₹/sq yd",
+      "mean": {
+        "mape": 0.4097826869800443,
+        "median_ape": 0.2803426065311371,
+        "within_20pct": 0.3394736842105263,
+        "mae_inr": 7467085.676258817,
+        "r2_log_price": 0.7510277636148677,
+        "nonpositive_predictions": 0.0
+      },
+      "std": {
+        "mape": 0.010870847600033958,
+        "median_ape": 0.021522706533737713,
+        "within_20pct": 0.0344235383690326,
+        "mae_inr": 392140.0444271317,
+        "r2_log_price": 0.011276917536936087,
+        "nonpositive_predictions": 0.0
+      },
+      "selection": {
+        "mape": 0.4097826869800443,
+        "gap_to_best": 0.015478625489175625,
+        "gap_se": 0.017604535526738366,
+        "within_one_se": true
+      }
+    },
+    "random_forest_log_rate": {
+      "label": "Random forest on log ₹/sq yd",
+      "mean": {
+        "mape": 0.3959791370383603,
+        "median_ape": 0.28580427663168806,
+        "within_20pct": 0.31184210526315786,
+        "mae_inr": 8574666.444173705,
+        "r2_log_price": 0.7631783475870175,
+        "nonpositive_predictions": 0.0
+      },
+      "std": {
+        "mape": 0.011004576071402232,
+        "median_ape": 0.021428709841060746,
+        "within_20pct": 0.03925377339520078,
+        "mae_inr": 318122.6455592533,
+        "r2_log_price": 0.012763564603839565,
+        "nonpositive_predictions": 0.0
+      },
+      "selection": {
+        "mape": 0.3959791370383603,
+        "gap_to_best": 0.0,
+        "gap_se": 0.0,
+        "within_one_se": true
+      }
+    }
+  },
+  "deployed_cv": {
+    "rows": 94,
+    "mean": {
+      "mape": 0.40187993581147197,
+      "median_ape": 0.2686873439373397,
+      "within_20pct": 0.38191489361702124,
+      "mae_inr": 9450440.98305196,
+      "r2_log_price": 0.8154652774061247,
+      "nonpositive_predictions": 0.0
+    },
+    "std": {
+      "mape": 0.009219934894999601,
+      "median_ape": 0.009832629765513502,
+      "within_20pct": 0.012736372337636855,
+      "mae_inr": 935916.3402122345,
+      "r2_log_price": 0.0056527863478389034,
+      "nonpositive_predictions": 0.0
+    }
+  },
+  "interval": {
+    "level": 0.8,
+    "log_low": -0.8383291904044441,
+    "log_high": 0.5450586738731062,
+    "n_residuals": 940
+  },
+  "test": {
+    "count": 1,
+    "latest": {
+      "evaluated_at": "2026-11-25T15:01:30+00:00",
+      "evaluation_number": 1,
+      "selected_model": "locality_median_rate",
+      "data_sha256": "034b04b67fc7bcf501a3f0fa7c7081a7cee46fe351f2ce8feed071fca08ea956",
+      "n_train": 76,
+      "n_test": 18,
+      "split_seed": 2026,
+      "interval_level": 0.8,
+      "results": {
+        "locality_median_rate": {
+          "label": "Baseline: locality median ₹/sq yd × area",
+          "mape": 0.3847013508290047,
+          "median_ape": 0.17189285714285713,
+          "within_20pct": 0.6666666666666666,
+          "mae_inr": 5470352.682811016,
+          "r2_log_price": 0.8915919872724875,
+          "nonpositive_predictions": 0,
+          "interval_coverage": 0.7777777777777778
+        },
+        "median_rate": {
+          "label": "Baseline: overall median ₹/sq yd × area",
+          "mape": 0.4813688261947637,
+          "median_ape": 0.21633597883597888,
+          "within_20pct": 0.5,
+          "mae_inr": 7683500.0,
+          "r2_log_price": 0.8621661495438359,
+          "nonpositive_predictions": 0,
+          "interval_coverage": 0.7777777777777778
+        }
+      }
+    },
+    "matches_deployed": true
+  }
+}

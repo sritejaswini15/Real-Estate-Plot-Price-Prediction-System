@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Plot prices by locality{% endblock %}
+{% block content %}
+{% set o = market.overall %}
+<section class="intro">
+  <h1>Plot prices by locality</h1>
+  <p class="lede">Median asking price per square yard across {{ o.listings }} cleaned 99acres listings for {{ o.distinct_plots }} distinct plots in and around {{ region }}.</p>
+</section>
+
+<section class="kpis" aria-label="Headline figures">
+  <div class="kpi"><p class="kpi-label">Median asking price</p><p class="kpi-value">{{ o.rate_median|inr }}<span class="kpi-unit">/sq yd</span></p></div>
+  <div class="kpi"><p class="kpi-label">Middle half of listings</p><p class="kpi-value">{{ o.rate_p25|inr }}–{{ o.rate_p75|inr }}</p></div>
+  <div class="kpi"><p class="kpi-label">Median plot size</p><p class="kpi-value">{{ o.median_area_sqyd|num }}<span class="kpi-unit"> sq yd</span></p></div>
+  <div class="kpi"><p class="kpi-label">Listings</p><p class="kpi-value">{{ o.listings }}</p></div>
+</section>
+
+<section class="card">
+  <h2 class="card-title">Median asking price per sq yd</h2>
+  <p class="muted">The number after each name is its listing count. Localities with fewer than 3 listings are grouped as “Other”.</p>
+  <figure class="chart">{{ chart }}</figure>
+  <div class="table-wrap">
+    <table class="data-table">
+      <caption>The same figures as a table, with the middle 50% of asking prices per sq yd.</caption>
+      <thead><tr><th scope="col">Locality</th><th scope="col" class="num">Listings</th><th scope="col" class="num">Median ₹/sq yd</th><th scope="col" class="num">Middle half</th><th scope="col" class="num">Median size</th><th scope="col" class="num">Median price</th></tr></thead>
+      <tbody>
+      {% for r in market.localities %}
+        <tr>
+          <th scope="row"><span class="cell-main">{{ r.locality }}</span>{% if r.members %}<span class="cell-sub">{{ r.members|join(", ") }}</span>{% endif %}</th>
+          <td class="num">{{ r.listings }}{% if r.distinct_plots != r.listings %} <span class="cell-sub">{{ r.distinct_plots }} distinct</span>{% endif %}</td>
+          <td class="num">{{ r.rate_median|inr }}</td>
+          <td class="num">{{ r.rate_p25|inr }}–{{ r.rate_p75|inr }}</td>
+          <td class="num">{{ r.median_area_sqyd|num }} sq yd</td>
+          <td class="num">{{ r.median_price_inr|inr_short }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title">About this data</h2>
+  <ul>
+    <li><strong>Asking prices, not sale prices.</strong> Sellers on 99acres set these. Registered sale values are often lower.</li>
+    <li><strong>One snapshot.</strong> The listings were collected once. The source does not record the date, so prices may have moved since.</li>
+    <li><strong>Cleaning.</strong> {{ quality.raw_rows }} raw rows became {{ quality.clean_rows }} listings.
+      {{ quality.dropped_invalid|length }} row{{ "s" if quality.dropped_invalid|length != 1 }} had impossible values{% for d in quality.dropped_invalid %} (source row {{ d.source_row }}: {{ d.reason }}){% endfor %},
+      and {{ quality.dropped_duplicate_source_rows|length }} exact duplicates were removed.
+      {{ quality.cross_posted_groups }} plots appear more than once under different localities; they are counted once as distinct plots.</li>
+    <li><strong>Gaps.</strong> Facing is missing for {{ quality.missing_after_cleaning.facing }} listings, open sides for {{ quality.missing_after_cleaning.open_sides }}, and road width for {{ quality.missing_after_cleaning.road_width_ft }}.</li>
+  </ul>
+</section>
+{% endblock %}

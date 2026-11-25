@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}API{% endblock %}
+{% block content %}
+<section class="intro">
+  <h1>JSON API</h1>
+  <p class="lede">The estimates behind this site, for your own scripts and apps. No key is needed.{% if rate_limit %} Each IP address can make up to {{ rate_limit }} estimates a minute, counting this site's form too.{% endif %}</p>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title"><code>POST /api/v1/predict</code></h2>
+  <p>Send a JSON object. Only <code>area</code> is required. Fields not listed below are rejected, so a typo cannot be silently ignored.</p>
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead><tr><th scope="col">Field</th><th scope="col">Type</th><th scope="col">Meaning</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code>area</code></th><td>number</td><td>Plot area, in <code>area_unit</code>. Must convert to {{ options.limits.area_sqyd[0]|num }}–{{ options.limits.area_sqyd[1]|num }} sq yd.</td></tr>
+        <tr><th scope="row"><code>area_unit</code></th><td>string</td><td>One of {% for k in options.area_units %}<code>{{ k }}</code>{{ ", " if not loop.last }}{% endfor %}. Default <code>sqyd</code>.</td></tr>
+        <tr><th scope="row"><code>locality</code></th><td>string</td><td>One of {% for l in options.localities %}<code>{{ l }}</code>{{ ", " if not loop.last }}{% endfor %}, or <code>{{ options.other_locality }}</code>. Default <code>{{ options.default_locality }}</code>.</td></tr>
+        <tr><th scope="row"><code>facing</code></th><td>string</td><td>A compass direction such as <code>East</code> or <code>North-East</code>. Optional.</td></tr>
+        <tr><th scope="row"><code>open_sides</code></th><td>integer</td><td>1–4. Optional.</td></tr>
+        <tr><th scope="row"><code>road_width_ft</code></th><td>number</td><td>Width of the road in front, in feet ({{ options.limits.road_width_ft[0]|num }}–{{ options.limits.road_width_ft[1]|num }}). Optional.</td></tr>
+        <tr><th scope="row"><code>in_project</code></th><td>boolean</td><td>Inside a named layout or gated venture. Default <code>false</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Example</h3>
+<pre><code>curl -X POST {{ request.host_url }}api/v1/predict \
+  -H "Content-Type: application/json" \
+  -d '{{ example_request }}'</code></pre>
+  <p>The response holds the estimate and range in rupees (rounded to ₹1,000), the price per sq yd, the normalised input, any warnings, comparable listings (up to 5; one shown here) and the model version. This is the live response from the current model:</p>
+<pre class="code-scroll"><code>{{ example_response }}</code></pre>
+  <h3>Errors</h3>
+  <p>Errors use the matching HTTP status and a JSON body <code>{"error": {"code": ..., "message": ...}}</code>. Validation errors (<code>400</code>) add a <code>fields</code> object that maps each bad field to a message. Other statuses: <code>415</code> (not JSON), <code>413</code> (body over 16 KB) and <code>429</code> (rate limit; see <code>Retry-After</code>).</p>
+</section>
+
+<section class="card prose">
+  <h2 class="card-title">Other endpoints</h2>
+  <ul>
+    <li><code>GET /api/v1/meta</code>: accepted values, limits, the inputs the model uses, and model version.</li>
+    <li><code>GET /api/v1/health</code>: liveness check for load balancers. Returns <code>{"status": "ok"}</code> and the model version.</li>
+  </ul>
+</section>
+{% endblock %}

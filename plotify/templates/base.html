@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Plotify{% endblock %} · Plotify</title>
+  <meta name="description" content="Estimate the asking price of a residential plot in {{ region }} from real listing data, with an honest error range and comparable listings.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css', v=asset_version) }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.svg') }}" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="{{ url_for('web.index') }}">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="3" width="26" height="26" rx="7"/><path d="M9 21h14M9 16h9M9 11h5"/></svg>
+        <span class="brand-name">Plotify</span>
+        <span class="brand-tag">{{ region }} plot prices</span>
+      </a>
+      <nav aria-label="Main">
+        <ul class="nav">
+          {% set nav = [("web.index", "Estimate"), ("web.market", "Market"), ("web.model", "How accurate?"), ("web.api_docs", "API")] %}
+          {% for endpoint, label in nav %}
+          <li><a href="{{ url_for(endpoint) }}"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ label }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Estimates come from {{ model_meta.listings }} <strong>asking prices</strong> in 99acres listings. They are not registered sale prices, valuations or financial advice. Check prices with the registration office and a local agent.</p>
+      <p class="footer-meta">Model {{ model_meta.model_version }} · trained {{ model_meta.trained_at[:10] }} · Plotify {{ app_version }}</p>
+    </div>
+  </footer>
+</body>
+</html>

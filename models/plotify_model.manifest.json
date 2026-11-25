@@ -1,0 +1,8 @@
+{
+  "file": "plotify_model.joblib",
+  "sha256": "a5664bdcdca464bdb4397de60264df9a59985cd120464ad98eff8050cbf54bca",
+  "format": 1,
+  "model_version": "20261125163405-034b04b6",
+  "sklearn_version": "1.9.1",
+  "python_version": "3.13.1"
+}

@@ -1,0 +1,37 @@
+{
+  "count": 1,
+  "evaluations": [
+    {
+      "evaluated_at": "2026-11-25T15:01:30+00:00",
+      "evaluation_number": 1,
+      "selected_model": "locality_median_rate",
+      "data_sha256": "034b04b67fc7bcf501a3f0fa7c7081a7cee46fe351f2ce8feed071fca08ea956",
+      "n_train": 76,
+      "n_test": 18,
+      "split_seed": 2026,
+      "interval_level": 0.8,
+      "results": {
+        "locality_median_rate": {
+          "label": "Baseline: locality median ₹/sq yd × area",
+          "mape": 0.3847013508290047,
+          "median_ape": 0.17189285714285713,
+          "within_20pct": 0.6666666666666666,
+          "mae_inr": 5470352.682811016,
+          "r2_log_price": 0.8915919872724875,
+          "nonpositive_predictions": 0,
+          "interval_coverage": 0.7777777777777778
+        },
+        "median_rate": {
+          "label": "Baseline: overall median ₹/sq yd × area",
+          "mape": 0.4813688261947637,
+          "median_ape": 0.21633597883597888,
+          "within_20pct": 0.5,
+          "mae_inr": 7683500.0,
+          "r2_log_price": 0.8621661495438359,
+          "nonpositive_predictions": 0,
+          "interval_coverage": 0.7777777777777778
+        }
+      }
+    }
+  ]
+}

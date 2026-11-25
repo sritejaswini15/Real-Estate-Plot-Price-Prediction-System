@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}{% if estimate %}{{ estimate.price_inr|inr_short }} estimate{% else %}Estimate a plot price{% endif %}{% endblock %}
+{% macro field_error(name) -%}
+  {% if errors.get(name) %}<p class="field-error" id="{{ name }}-error">{{ errors[name] }}</p>{% endif %}
+{%- endmacro %}
+{% macro describedby(name, help=True) -%}
+  {%- set ids = [] -%}
+  {%- if help %}{% set _ = ids.append(name ~ "-help") %}{% endif -%}
+  {%- if errors.get(name) %}{% set _ = ids.append(name ~ "-error") %}{% endif -%}
+  {%- if ids %}aria-describedby="{{ ids|join(' ') }}"{% endif %}{% if errors.get(name) %} aria-invalid="true"{% endif %}
+{%- endmacro %}
+{% block content %}
+<section class="intro">
+  <h1>What should a plot in {{ region }} cost?</h1>
+  <p class="lede">Enter a plot's size and locality. You get a typical asking price, a realistic range, and the real listings most like it.</p>
+</section>
+
+<div class="estimator">
+  <form class="card form" method="get" action="{{ url_for('web.index') }}" novalidate>
+    <h2 class="card-title">Plot details</h2>
+    {% if errors %}
+    <div class="alert alert-error" role="alert">
+      <p><strong>Please check {{ "this field" if errors|length == 1 else "these fields" }}:</strong></p>
+      <ul>{% for name, message in errors.items() %}<li><a href="#{{ name }}">{{ message }}</a></li>{% endfor %}</ul>
+    </div>
+    {% endif %}
+
+    <div class="field{% if errors.area %} has-error{% endif %}">
+      <label for="area">Plot area <span class="tag">required</span></label>
+      <div class="input-group">
+        <input id="area" name="area" type="number" inputmode="decimal" min="0" step="any" required
+               value="{{ form.area }}" placeholder="e.g. 200" {{ describedby("area") }}>
+        <select id="area_unit" name="area_unit" aria-label="Area unit">
+          {% for key, label in options.area_units.items() %}
+          <option value="{{ key }}"{% if form.area_unit == key %} selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <p class="help" id="area-help">Most listed plots are 150–300 sq yd. 1 guntha = 121 sq yd, 1 acre = 4,840 sq yd.</p>
+      {{ field_error("area") }}
+    </div>
+
+    <div class="field{% if errors.locality %} has-error{% endif %}">
+      <label for="locality">Locality</label>
+      <select id="locality" name="locality" {{ describedby("locality") }}>
+        {% for name in options.localities %}
+        <option value="{{ name }}"{% if form.locality == name %} selected{% endif %}>{{ name }}{% if name == region %} (general / not specified){% endif %}</option>
+        {% endfor %}
+        <option value="{{ options.other_locality }}"{% if form.locality == options.other_locality or form.locality in options.rare_localities %} selected{% endif %}>Somewhere else near {{ region }}</option>
+      </select>
+      <p class="help" id="locality-help">Only localities with at least 3 listings are offered by name.</p>
+      {{ field_error("locality") }}
+    </div>
+
+    <div class="field-row">
+      <div class="field{% if errors.facing %} has-error{% endif %}">
+        <label for="facing">Facing</label>
+        <select id="facing" name="facing" {{ describedby("facing", False) }}>
+          <option value="">Not sure</option>
+          {% for f in options.facings %}<option value="{{ f }}"{% if form.facing == f %} selected{% endif %}>{{ f }}</option>{% endfor %}
+        </select>
+        {{ field_error("facing") }}
+      </div>
+      <div class="field{% if errors.open_sides %} has-error{% endif %}">
+        <label for="open_sides">Open sides</label>
+        <select id="open_sides" name="open_sides" {{ describedby("open_sides", False) }}>
+          <option value="">Not sure</option>
+          {% for n in options.open_sides %}<option value="{{ n }}"{% if form.open_sides == n|string %} selected{% endif %}>{{ n }}</option>{% endfor %}
+        </select>
+        {{ field_error("open_sides") }}
+      </div>
+    </div>
+
+    <div class="field{% if errors.road_width_ft %} has-error{% endif %}">
+      <label for="road_width_ft">Road width in front <span class="tag tag-muted">optional</span></label>
+      <div class="input-group">
+        <input id="road_width_ft" name="road_width_ft" type="number" inputmode="decimal" min="5" max="300" step="any"
+               value="{{ form.road_width_ft }}" placeholder="e.g. 30" {{ describedby("road_width_ft") }}>
+        <span class="input-suffix">ft</span>
+      </div>
+      <p class="help" id="road_width_ft-help">Typical layout roads are 30, 40 or 60 ft.</p>
+      {{ field_error("road_width_ft") }}
+    </div>
+
+    <div class="field field-check{% if errors.in_project %} has-error{% endif %}">
+      <input id="in_project" name="in_project" type="checkbox" value="1"{% if form.in_project in ("1", "true", "on") %} checked{% endif %}>
+      <label for="in_project">Inside a named layout or gated venture</label>
+      {{ field_error("in_project") }}
+    </div>
+
+    <button class="button" type="submit">Estimate price</button>
+  </form>
+
+  <section class="card result" aria-labelledby="result-title">
+    {% if estimate %}
+      {% set q = estimate.query %}
+      {% set level = (estimate.interval_level * 100)|round|int %}
+      <p class="eyebrow">Estimated asking price</p>
+      <h2 id="result-title" class="hero">{{ estimate.price_inr|inr_short }}</h2>
+      <p class="hero-sub">{{ estimate.price_inr|inr }} · {{ estimate.price_per_sqyd|inr }} per sq yd</p>
+      <p class="query-echo">For {{ q.area|num(2) }} {{ options.area_units[q.area_unit] }}{% if q.area_unit != "sqyd" %} ({{ q.area_sqyd|num(1) }} sq yd){% endif %}
+        in {{ q.locality if q.locality != options.other_locality else "a less common locality" }}{% if q.facing %}, {{ q.facing }} facing{% endif %}{% if q.open_sides %}, {{ q.open_sides }} open side{{ "s" if q.open_sides > 1 }}{% endif %}{% if q.road_width_ft %}, {{ q.road_width_ft|num(1) }} ft road{% endif %}{% if q.in_project %}, in a named layout{% endif %}.</p>
+
+      <div class="range-box">
+        <p class="range-label">Realistic range ({{ level }}%)</p>
+        <p class="range-value">{{ estimate.low_inr|inr_short }} – {{ estimate.high_inr|inr_short }}</p>
+        <p class="range-help">In cross-validation, {{ level }}% of held-out listings had an asking price inside a range this wide around their estimate. With this few listings, a wide range is the honest answer.</p>
+      </div>
+
+      {% if estimate.warnings %}
+      <div class="alert alert-warning" role="note">
+        <p><strong>Read with care</strong></p>
+        <ul>{% for w in estimate.warnings %}<li>{{ w }}</li>{% endfor %}</ul>
+      </div>
+      {% endif %}
+      {% for note in estimate.notes %}<p class="note">{{ note }}</p>{% endfor %}
+
+      {% if estimate.comparables %}
+      <h3 class="section-title">Where it sits among similar listings</h3>
+      <figure class="chart">
+        {{ chart }}
+      </figure>
+      <div class="table-wrap">
+        <table class="data-table">
+          <caption>Most similar listings: plot size counts most, then locality, road width and facing. One per cross-posted plot.</caption>
+          <thead><tr><th scope="col">Listing</th><th scope="col" class="num">Area</th><th scope="col" class="num">Asking price</th><th scope="col" class="num">₹ / sq yd</th><th scope="col">Facing</th><th scope="col" class="num">Road</th></tr></thead>
+          <tbody>
+          {% for c in estimate.comparables %}
+            <tr>
+              <td><span class="cell-main">{{ c.locality }}</span>{% if c.project %}<span class="cell-sub">{{ c.project }}</span>{% endif %}<span class="cell-sub">source row {{ c.source_row }}</span></td>
+              <td class="num">{{ c.area_sqyd|num(2) }}</td>
+              <td class="num">{{ c.price_inr|inr_short }}</td>
+              <td class="num">{{ c.price_per_sqyd|inr }}</td>
+              <td>{{ c.facing or "—" }}</td>
+              <td class="num">{% if c.road_width_ft %}{{ c.road_width_ft|num(1) }} ft{% else %}—{% endif %}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+      <p class="permalink">This page's address keeps your inputs, so you can bookmark or share the estimate.</p>
+    {% else %}
+      <p class="eyebrow">How it works</p>
+      <h2 id="result-title" class="card-title">Built on real listings, honest about error</h2>
+      <ol class="steps">
+        <li><strong>{{ model_meta.listings }} cleaned listings</strong> from 99acres, with duplicates, unit errors and cross-posted copies handled.</li>
+        <li><strong>The simplest model that is as accurate as any we tested.</strong> It was chosen by grouped cross-validation, and every model was compared with plain baselines.</li>
+        <li><strong>An error range, not just one number.</strong> The {{ (interval.level * 100)|round|int }}% range comes from how wrong past estimates were on listings the model had not seen.</li>
+      </ol>
+      <p class="muted">Want the details? See <a href="{{ url_for('web.model') }}">how accurate the estimates are</a> or <a href="{{ url_for('web.market') }}">prices by locality</a>.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

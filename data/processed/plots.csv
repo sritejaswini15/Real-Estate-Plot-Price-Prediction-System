@@ -1,0 +1,95 @@
+source_row,title,location,locality,project,in_project,price_inr,area_sqyd,price_per_sqyd,facing,open_sides,road_width_ft,group_id
+2,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,8500000.0,150.0,56666.67,South-West,2,150.0,50
+3,"Residential Land/Plot for Sale in CK Golden Doors, Patancheru, Hyderabad",CK Golden Doors Patancheru,Patancheru,CK Golden Doors,True,8500000.0,200.0,42500.0,East,2,30.0,51
+4,"Residential Land/Plot for Sale in Patighanpur, Patancheru","Patighanpur, Patancheru",Patighanpur,,False,12000000.0,300.0,40000.0,West,1,100.0,62
+5,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,6100000.0,204.0,29901.96,,2,,34
+6,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,6100000.0,204.0,29901.96,,2,,34
+7,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,100000000.0,2000.0,50000.0,North-East,1,50.0,76
+8,"Residential Land/Plot for Sale in Chitkul, Patancheru",Chitkul,Chitkul,,False,6100000.0,204.0,29901.96,,2,,34
+9,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,3000000.0,150.0,20000.0,East,2,60.0,7
+10,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,160000000.0,4000.0,40000.0,East,2,60.0,77
+12,"Residential Land/Plot for Sale in sai Garden , Patancheru, Hyderabad",sai Garden Patancheru,Patancheru,sai Garden,True,5800000.0,200.0,29000.0,West,2,30.0,29
+13,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,6080000.0,160.0,38000.0,East,1,,33
+14,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,2400000.0,200.0,12000.0,East,2,60.0,2
+15,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,5200000.0,200.0,26000.0,East,2,100.0,20
+16,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,2500000.0,150.0,16666.67,North-East,1,60.0,3
+17,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,5400000.0,200.0,27000.0,West,1,,23
+18,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,20000000.0,500.0,40000.0,East,2,60.0,72
+19,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,8000000.0,160.0,50000.0,West,2,30.0,45
+20,"Residential Land/Plot for Sale in SRR Gachibowli Paradise County Phase 5, Patancheru, Hyderabad",SRR Gachibowli Paradise County Phase 5 Patancheru,Patancheru,SRR Gachibowli Paradise County Phase 5,True,2600000.0,200.0,13000.0,North,2,31.0,4
+21,"Residential Land/Plot for Sale in Pragna Oak Meadows, Kistareddypet, Patancheru","Pragna Oak Meadows Kistareddypet, Patancheru",Kistareddypet,Pragna Oak Meadows,True,10000000.0,325.0,30769.23,East,1,30.0,55
+22,"Residential Land/Plot for Sale in abhinandan avenue, Chitkul, Isnapur, Patancheru","abhinandan avenue, Chitkul Isnapur, Patancheru",Isnapur,"abhinandan avenue, Chitkul",True,4000000.0,150.0,26666.67,East,2,30.0,11
+23,"Residential Land/Plot for Sale in Kistareddypet, Patancheru","Kistareddypet, Patancheru",Kistareddypet,,False,35000000.0,538.0,65055.76,North-West,2,25.0,73
+24,"Residential Land/Plot for Sale in Sandstone Excella Greens, Patancheru, Hyderabad",Sandstone Excella Greens Patancheru,Patancheru,Sandstone Excella Greens,True,5250000.0,150.0,35000.0,East,2,30.0,21
+25,"Residential Land/Plot for Sale in Silicon City Phase 2, Patighanpur, Patancheru","Silicon City Phase 2 Patighanpur, Patancheru",Patighanpur,Silicon City Phase 2,True,12500000.0,223.0,56053.81,North-East,2,50.0,64
+26,"Residential Land/Plot for Sale in Lahari Ananda Plots, Patancheru, Hyderabad",Lahari Ananda Plots Patancheru,Patancheru,Lahari Ananda Plots,True,10000000.0,238.0,42016.81,East,1,,53
+27,"Residential Land/Plot for Sale in happy homes, Patancheru, Hyderabad",happy homes Patancheru,Patancheru,happy homes,True,5550000.0,200.0,27750.0,East,2,60.0,25
+28,"Residential Land/Plot for Sale in Navya Sarovar, Patancheru, Hyderabad",Navya Sarovar Patancheru,Patancheru,Navya Sarovar,True,5800000.0,180.0,32222.22,West,2,30.0,28
+29,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,8200000.0,275.0,29818.18,,,30.0,48
+30,"Residential Land/Plot for Sale in Nandan Ratan Pride, Sreeram Nagar Colony, Patancheru","Nandan Ratan Pride Sreeram Nagar Colony, Patancheru",Sreeram Nagar Colony,Nandan Ratan Pride,True,10500000.0,150.0,70000.0,West,2,30.0,57
+31,"Residential Land/Plot for Sale in HMDA,RERA,Final approved lay out , Patighanpur, Patancheru","HMDA,RERA,Final approved lay out Patighanpur, Patancheru",Patighanpur,"HMDA,RERA,Final approved lay out",True,6156000.0,162.0,38000.0,West,,30.0,35
+32,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,12000000.0,241.0,49792.53,South,,,60
+33,"Residential Land/Plot for Sale in Aparna Avani, Isnapur, Patancheru","Aparna Avani Isnapur, Patancheru",Isnapur,Aparna Avani,True,12200000.0,311.0,39228.3,,,,63
+34,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,5000000.0,150.0,33333.33,,,,18
+35,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,4400000.0,201.6,21825.4,,,,14
+36,"Residential Land/Plot for Sale in Aparna Avani, Isnapur, Patancheru","Aparna Avani Isnapur, Patancheru",Isnapur,Aparna Avani,True,12000000.0,267.0,44943.82,South,2,60.0,61
+37,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,13100000.0,267.0,49063.67,West,2,,66
+38,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,5500000.0,106.0,51886.79,East,2,,24
+39,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,7500000.0,150.0,50000.0,,,,41
+40,"Residential Land/Plot for Sale in Pati, Patancheru","Pati, Patancheru",Pati,,False,7700000.0,148.0,52027.03,South,2,,42
+41,"Residential Land/Plot for Sale in Navya Sarovar, Patancheru, Hyderabad",Navya Sarovar Patancheru,Patancheru,Navya Sarovar,True,10400000.0,400.0,26000.0,North-West,2,,56
+42,"Residential Land/Plot for Sale in Celebrity Green Nest, Patancheru, Hyderabad",Celebrity Green Nest Patancheru,Patancheru,Celebrity Green Nest,True,4400000.0,200.0,22000.0,East,1,30.0,13
+43,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,9300000.0,168.67,55137.25,West,1,33.0,52
+44,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,15500000.0,320.0,48437.5,West,1,,67
+45,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,8400000.0,200.0,42000.0,South-West,2,60.0,49
+46,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,6000000.0,106.0,56603.77,,,,31
+47,"Residential Land/Plot for Sale in Patancheru Industrial Area, Hyderabad",Patancheru Industrial Area,Patancheru Industrial Area,,False,10900000.0,311.0,35048.23,,,,58
+48,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,6750000.0,150.0,45000.0,West,1,50.0,38
+49,"Residential Land/Plot for Sale in Aparna Avani, Isnapur, Patancheru","Aparna Avani Isnapur, Patancheru",Isnapur,Aparna Avani,True,15700000.0,350.0,44857.14,West,1,60.0,68
+50,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,10500000.0,150.0,70000.0,,,,57
+51,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,8000000.0,200.0,40000.0,,,,46
+52,"Residential Land/Plot for Sale in Kistareddypet, Patancheru","Kistareddypet, Patancheru",Kistareddypet,,False,17900000.0,373.0,47989.28,,,,70
+53,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,6400000.0,200.0,32000.0,East,1,30.0,36
+54,"Residential Land/Plot for Sale in Aparna Avani, Isnapur, Patancheru","Aparna Avani Isnapur, Patancheru",Isnapur,Aparna Avani,True,6929000.0,220.0,31495.45,East,3,100.0,39
+55,"Residential Land/Plot for Sale in Arrjava Farms, Patancheru, Hyderabad",Arrjava Farms Patancheru,Patancheru,Arrjava Farms,True,1400000.0,121.0,11570.25,East,2,40.0,0
+56,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,1050000000.0,33880.0,30991.74,East,,40.0,80
+57,"Residential Land/Plot for Sale in Navya The Royal, Patancheru, Hyderabad",Navya The Royal Patancheru,Patancheru,Navya The Royal,True,7800000.0,200.0,39000.0,East,1,30.0,43
+58,"Residential Land/Plot for Sale in Patighanpur, Patancheru","Patighanpur, Patancheru",Patighanpur,,False,7900000.0,200.0,39500.0,East,1,100.0,44
+59,"Residential Land/Plot for Sale in Pati, Patancheru","Pati, Patancheru",Pati,,False,5700000.0,150.0,38000.0,East,2,100.0,27
+60,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,5700000.0,150.0,38000.0,East,1,100.0,27
+61,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,5700000.0,150.0,38000.0,East,2,100.0,27
+66,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,2667000.0,242.0,11020.66,East,1,100.0,5
+67,"Residential Land/Plot for Sale in Alwin Colony,Patancheruvu, Hyderabad","Alwin Colony,Patancheruvu",Alwin Colony,,False,6100000.0,204.0,29901.96,,2,,34
+69,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,4050000.0,150.0,27000.0,East,2,100.0,12
+70,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,4050000.0,150.0,27000.0,East,1,100.0,12
+71,"Residential Land/Plot for Sale in Krishya S Vista, Isnapur, Patancheru","Krishya S Vista Isnapur, Patancheru",Isnapur,Krishya S Vista,True,5700000.0,150.0,38000.0,East,1,,27
+72,"Residential Land/Plot for Sale in SVKR Silpa Sentosa, Isnapur, Patancheru","SVKR Silpa Sentosa Isnapur, Patancheru",Isnapur,SVKR Silpa Sentosa,True,4864000.0,128.0,38000.0,East,2,,17
+73,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,2699000.0,242.0,11152.89,,,,6
+74,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,330000000.0,3000.0,110000.0,North,2,,78
+75,"Residential Land/Plot for Sale in Isnapur, Patancheru","Isnapur, Patancheru",Isnapur,,False,65000000.0,1000.0,65000.0,North,2,,75
+76,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,400000000.0,8000.0,50000.0,East,1,60.0,79
+77,"Residential Land/Plot for Sale in Anmol Alpine Vistas, Patancheru, Hyderabad",Anmol Alpine Vistas Patancheru,Patancheru,Anmol Alpine Vistas,True,57600000.0,1200.0,48000.0,North-East,1,30.0,74
+78,"Residential Land/Plot for Sale in HMDA gatedcommunity plots, Kistareddypet, Patancheru","HMDA gatedcommunity plots Kistareddypet, Patancheru",Kistareddypet,HMDA gatedcommunity plots,True,5600000.0,200.0,28000.0,East,2,40.0,26
+79,"Residential Land/Plot for Sale in Grater Global City 6, Isnapur, Patancheru","Grater Global City 6 Isnapur, Patancheru",Isnapur,Grater Global City 6,True,3875000.0,155.0,25000.0,East,1,100.0,9
+80,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,10000000.0,240.0,41666.67,South-West,2,60.0,54
+81,"Residential Land/Plot for Sale in prime avenue league , Muthangi, Patancheru","prime avenue league Muthangi, Patancheru",Muthangi,prime avenue league,True,6000000.0,150.0,40000.0,East,2,100.0,32
+82,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,3993000.0,363.0,11000.0,East,1,33.0,10
+83,"Residential Land/Plot for Sale in Patighanpur, Patancheru","Patighanpur, Patancheru",Patighanpur,,False,12600000.0,300.0,42000.0,West,2,40.0,65
+84,"Residential Land/Plot for Sale in BDL layout, Patancheru, Hyderabad",BDL layout Patancheru,Patancheru,BDL layout,True,11000000.0,290.0,37931.03,West,1,40.0,59
+85,"Residential Land/Plot for Sale in Sandstone Eternity, Patancheru, Hyderabad",Sandstone Eternity Patancheru,Patancheru,Sandstone Eternity,True,5010000.0,167.0,30000.0,East,2,30.0,19
+86,"Residential Land/Plot for Sale in Lalitha Gardenia, Patancheru, Hyderabad",Lalitha Gardenia Patancheru,Patancheru,Lalitha Gardenia,True,4542000.0,395.0,11498.73,East,2,60.0,16
+87,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,3660000.0,305.0,12000.0,East,1,60.0,8
+88,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,5805000.0,222.0,26148.65,East,2,60.0,30
+89,"Residential Land/Plot for Sale in Patighanpur, Patancheru","Patighanpur, Patancheru",Patighanpur,,False,18000000.0,400.0,45000.0,West,2,40.0,71
+90,"Residential Land/Plot for Sale in Green ville, Patighanpur, Patancheru","Green ville Patighanpur, Patancheru",Patighanpur,Green ville,True,12000000.0,300.0,40000.0,West,2,30.0,62
+91,"Residential Land/Plot for Sale in Navya Sarovar, Patancheru, Hyderabad",Navya Sarovar Patancheru,Patancheru,Navya Sarovar,True,6588000.0,183.0,36000.0,East,1,100.0,37
+92,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,16200000.0,600.0,27000.0,West,2,,69
+93,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,7290000.0,270.0,27000.0,,,,40
+94,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,8100000.0,300.0,27000.0,East,2,,47
+95,"Residential Land/Plot for Sale in Pati, Patancheru","Pati, Patancheru",Pati,,False,5700000.0,150.0,38000.0,East,1,100.0,27
+96,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,1444000.0,121.0,11933.88,North,2,100.0,1
+97,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,16200000.0,600.0,27000.0,East,2,,69
+98,"Residential Land/Plot for Sale in Muthangi, Patancheru","Muthangi, Patancheru",Muthangi,,False,8100000.0,300.0,27000.0,,,,47
+99,"Residential Land/Plot for Sale in Pati, Patancheru","Pati, Patancheru",Pati,,False,6100000.0,204.0,29901.96,,2,,34
+100,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,5280000.0,480.0,11000.0,East,2,60.0,22
+101,"Residential Land/Plot for Sale in Patancheru, Hyderabad",Patancheru,Patancheru,,False,4427000.0,385.0,11498.7,East,1,50.0,15
